@@ -1,0 +1,34 @@
+version: '2'
+services:
+  php-fpm:
+    image: php:7.0-fpm-alpine
+    volumes:
+        - ./www:/var/www/html
+    links:
+      - mariadb
+    restart: on-failure:3
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes_from:
+      - php-fpm
+    volumes:
+      - ./nginx/config:/etc/nginx/conf.d
+    links:
+      - php-fpm
+    restart: on-failure:3
+  mariadb:
+    image: mariadb:latest
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mariadb/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=admin
+      - MYSQL_USER=developer
+      - MYSQL_PASSWORD=developer
+    restart: on-failure:3
+
