@@ -1,7 +1,8 @@
 version: '2'
 services:
   php-fpm:
-    image: php:7.0-fpm-alpine
+    build: php-fpm
+    image: liyu/php-fpm
     volumes:
         - ./www:/var/www/html
     links:
