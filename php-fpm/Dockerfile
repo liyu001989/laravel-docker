@@ -6,12 +6,17 @@ MAINTAINER liyu liyu001989@gmail.com
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/' /etc/apk/repositories
 RUN apk update && apk upgrade
 
-# mcrypt 扩展需要的依赖
+# mcrypt 扩展
 RUN apk add libmcrypt-dev
-
-# pdo_mysql mcrypt 扩展
-RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install mcrypt
+
+# gd 扩展
+RUN apk add libjpeg-turbo-dev
+RUN apk add libpng-dev
+RUN docker-php-ext-install gd
+
+# pdo_mysql 扩展
+RUN docker-php-ext-install pdo_mysql
 
 # 安装 composer
 RUN php -r "readfile('http://install.phpcomposer.com/installer');" | php -- --install-dir=/bin/ --filename=composer
