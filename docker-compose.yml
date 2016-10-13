@@ -3,8 +3,8 @@ services:
   php-fpm:
     build: php-fpm
     image: liyu/php-fpm
-    volumes:
-        - ./www:/var/www/html
+    volumes_from:
+        - www_data
     links:
       - mariadb
     restart: on-failure:3
@@ -14,7 +14,7 @@ services:
       - "80:80"
       - "443:443"
     volumes_from:
-      - php-fpm
+      - www_data
     volumes:
       - ./nginx/config:/etc/nginx/conf.d
     links:
@@ -32,4 +32,8 @@ services:
       - MYSQL_USER=developer
       - MYSQL_PASSWORD=developer
     restart: on-failure:3
+  www_data:
+      image: tianon/true
+      volumes:
+        - ./www:/var/www/html
 
