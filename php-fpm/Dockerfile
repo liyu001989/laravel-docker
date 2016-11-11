@@ -18,5 +18,8 @@ RUN docker-php-ext-install gd
 # pdo_mysql 扩展
 RUN docker-php-ext-install pdo_mysql
 
+# bamatch
+RUN docker-php-ext-install bcmath
+
 # 安装 composer
 RUN php -r "readfile('http://install.phpcomposer.com/installer');" | php -- --install-dir=/bin/ --filename=composer

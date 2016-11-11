@@ -32,12 +32,12 @@ services:
       - MYSQL_USER=developer
       - MYSQL_PASSWORD=developer
     restart: on-failure:3
-  redis:
-    image: redis:alpine
-    ports:
-      - "6379:6379"
   volumes_www:
       image: tianon/true
       volumes:
         - ./www:/var/www/html
+        - /mnt/www:/var/www/html
+        - /mnt/wwwlogs:/mnt/wwwlogs
+        - /opt/gitlab:/opt/gitlab
+        - /var/opt/gitlab:/var/opt/gitlab
 
