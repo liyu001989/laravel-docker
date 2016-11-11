@@ -7,6 +7,15 @@ services:
         - volumes_www
     links:
       - mariadb
+      - redis
+    restart: on-failure:3
+  php-cli-daemon:
+    build: php-cli-daemon
+    image: liyu/php-cli-daemon
+    volumes_from:
+       - volumes_www
+    volumes:
+       - ./php-cli-daemon/supervisor.d:/etc/supervisor.d
     restart: on-failure:3
   nginx:
     image: nginx:alpine
@@ -16,7 +25,7 @@ services:
     volumes_from:
       - volumes_www
     volumes:
-      - ./nginx/config:/etc/nginx/conf.d
+      - ./nginx/conf.d:/etc/nginx/conf.d
     links:
       - php-fpm
     restart: on-failure:3
