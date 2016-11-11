@@ -27,4 +27,6 @@ RUN php -r "readfile('http://install.phpcomposer.com/installer');" | php -- --in
 # supervisor
 RUN apk add supervisor
 
+COPY supervisor.conf /etc/supervisor.conf
+
 CMD ["supervisord"]
