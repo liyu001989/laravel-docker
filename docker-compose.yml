@@ -8,6 +8,11 @@ services:
     links:
       - mariadb
     restart: on-failure:3
+  php-cli-daemon:
+    build: php-cli-daemon
+    image: liyu/php-cli-daemon
+    volumes_from:
+        - volumes_www
   nginx:
     image: nginx:alpine
     ports:
@@ -17,6 +22,9 @@ services:
       - volumes_www
     volumes:
       - ./nginx/config:/etc/nginx/conf.d
+      - /opt/gitlab:/opt/gitlab
+      - /var/opt/gitlab:/var/opt/gitlab
+      - /mnt/wwwlogs:/mnt/wwwlogs
     links:
       - php-fpm
     restart: on-failure:3
@@ -28,16 +36,8 @@ services:
       - ./mariadb/data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=laravel
-      - MYSQL_USER=developer
-      - MYSQL_PASSWORD=developer
     restart: on-failure:3
   volumes_www:
       image: tianon/true
       volumes:
-        - ./www:/var/www/html
         - /mnt/www:/var/www/html
-        - /mnt/wwwlogs:/mnt/wwwlogs
-        - /opt/gitlab:/opt/gitlab
-        - /var/opt/gitlab:/var/opt/gitlab
-
