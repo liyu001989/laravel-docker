@@ -13,6 +13,8 @@ services:
     image: liyu/php-cli-daemon
     volumes_from:
         - volumes_www
+    volumes:
+        - ./php-cli-daemon/config:/etc/supervisor.d
   nginx:
     image: nginx:alpine
     ports:
