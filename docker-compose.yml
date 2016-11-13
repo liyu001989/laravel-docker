@@ -26,6 +26,7 @@ services:
       - volumes_www
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
     links:
       - php-fpm
     restart: on-failure:3
@@ -37,9 +38,6 @@ services:
       - ./mariadb/data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=laravel
-      - MYSQL_USER=developer
-      - MYSQL_PASSWORD=developer
     restart: on-failure:3
   redis:
     image: redis:alpine
