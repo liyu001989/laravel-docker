@@ -32,7 +32,7 @@ services:
     restart: on-failure:3
   mariadb:
     image: mariadb:latest
-    ports: 
+    ports:
       - "3307:3306"
     volumes:
       - ./mariadb/data:/var/lib/mysql
@@ -47,4 +47,4 @@ services:
       image: tianon/true
       volumes:
         - ./www:/var/www/html
-
+        - /etc/localtime:/etc/localtime
