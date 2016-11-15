@@ -16,5 +16,8 @@ RUN docker-php-ext-install gd
 # pdo_mysql 扩展
 RUN docker-php-ext-install pdo_mysql
 
+# 配置php.ini, 项目中是默认的，可自行配置
+COPY config/php.ini /usr/local/etc/php/
+
 # 安装 composer
 RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/bin/ --filename=composer
