@@ -1,4 +1,4 @@
-FROM php:7.0-alpine
+FROM php:7.1.9-alpine
 
 MAINTAINER liyu liyu001989@gmail.com
 

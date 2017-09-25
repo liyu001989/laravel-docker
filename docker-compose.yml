@@ -39,6 +39,15 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: on-failure:3
+  mysql:
+    image: mysql:latest
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: on-failure:3
   redis:
     image: redis:alpine
     ports:
