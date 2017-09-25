@@ -17,6 +17,13 @@ services:
     volumes:
        - ./php-cli-daemon/supervisor.d:/etc/supervisor.d
     restart: on-failure:3
+  laravel-echo:
+    build: laravel-echo
+    image: liyu/laravel-echo
+    ports:
+      - 6001:6001
+    links:
+      - redis
   nginx:
     image: nginx:alpine
     ports:
@@ -27,6 +34,8 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/ssl/certs:/etc/ssl/certs
     links:
       - php-fpm
     restart: on-failure:3
