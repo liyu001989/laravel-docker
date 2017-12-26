@@ -6,7 +6,7 @@ services:
     volumes_from:
         - volumes_www
     links:
-      - mariadb
+      - mysql
       - redis
     restart: on-failure:3
   php-cli-daemon:
@@ -17,13 +17,13 @@ services:
     volumes:
        - ./php-cli-daemon/supervisor.d:/etc/supervisor.d
     restart: on-failure:3
-  laravel-echo:
-    build: laravel-echo
-    image: liyu/laravel-echo
-    ports:
-      - 6001:6001
-    links:
-      - redis
+  #laravel-echo:
+    #build: laravel-echo
+    #image: liyu/laravel-echo
+    #ports:
+      #- 6001:6001
+    #links:
+      #- redis
   nginx:
     image: nginx:alpine
     ports:

@@ -1,12 +1,8 @@
-FROM php:7.1.9-alpine
+FROM php:7.2.0-alpine
 
 MAINTAINER liyu liyu001989@gmail.com
 
 RUN apk update && apk upgrade
-
-# mcrypt 扩展
-RUN apk add libmcrypt-dev
-RUN docker-php-ext-install mcrypt
 
 # gd 扩展
 RUN apk add libjpeg-turbo-dev
