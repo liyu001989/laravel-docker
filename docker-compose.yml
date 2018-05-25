@@ -17,6 +17,9 @@ services:
     volumes:
        - ./php-cli-daemon/supervisor.d:/etc/supervisor.d
     restart: on-failure:3
+  sync-localtime:
+   build: sync-localtime
+   image: dennyellen/sync-localtime
   #laravel-echo:
     #build: laravel-echo
     #image: liyu/laravel-echo
@@ -65,4 +68,4 @@ services:
       image: tianon/true
       volumes:
         - ./www:/var/www/html
-        - /etc/localtime:/etc/localtime
+        # - /etc/localtime:/etc/localtime
